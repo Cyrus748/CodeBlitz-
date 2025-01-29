@@ -1,0 +1,62 @@
+export const themeStyles = {
+  control: (styles) => ({
+    ...styles,
+    width: "100%",
+    maxWidth: "16rem", 
+    minWidth: "14rem",
+    borderRadius: "8px", 
+    color: "#000000", 
+    fontSize: "0.9rem", 
+    lineHeight: "1.6rem", 
+    backgroundColor: "#f9f9f9", 
+    cursor: "pointer",
+    border: "2px solid #ddd", 
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", 
+    transition: "all 0.3s ease-in-out", 
+    ":hover": {
+      border: "2px solid #6c63ff", 
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.15)", 
+    },
+    ":focus": {
+      border: "2px solid #6c63ff", 
+      boxShadow: "0 0 0 0.2rem rgba(108, 99, 255, 0.25)", 
+    },
+  }),
+  option: (styles) => ({
+    ...styles,
+    color: "#333", 
+    fontSize: "0.9rem",
+    lineHeight: "1.6rem", 
+    width: "100%",
+    background: "#fff", 
+    padding: "10px 12px", 
+    borderRadius: "6px", 
+    
+    ":hover": {
+      backgroundColor: "rgba(108, 99, 255, 0.1)", 
+      color: "#6c63ff", 
+      cursor: "pointer",
+    },
+    ":active": {
+      backgroundColor: "rgba(108, 99, 255, 0.2)", 
+      color: "#6c63ff", 
+    },
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "#fff", 
+    maxWidth: "16rem", 
+    border: "2px solid #ddd",
+    borderRadius: "8px", 
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", 
+    overflow: "hidden", 
+    transition: "all 0.3s ease-in-out", 
+    border:"1px solid #6c63ff",
+  }),
+  placeholder: (defaultStyles) => ({
+    ...defaultStyles,
+    color: "#000000", 
+    fontSize: "0.9rem",
+    lineHeight: "1.6rem",
+  }),
+};
