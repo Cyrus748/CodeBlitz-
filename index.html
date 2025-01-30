@@ -9,5 +9,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="text/javascript" src="https://unpkg.com/monaco-themes/dist/monaco-themes.js"></script>
+<script type="text/javascript">
+    var tmThemeString = /* read using FileReader */
+    var themeData = MonacoThemes.parseTmTheme(tmThemeString);
+    monaco.editor.defineTheme('mytheme', themeData);
+    monaco.editor.setTheme('mytheme');
+</script>
   </body>
 </html>
