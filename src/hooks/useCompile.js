@@ -10,20 +10,18 @@ const useCompile = (
 ) => {
   const [processing, setProcessing] = useState(false);
 
-  // Function to handle compilation
   const handleCompile = async () => {
     setProcessing(true);
 
     const formData = {
-      clientId: import.meta.env.VITE_RAPID_HOST, // JDoodle clientId
-      clientSecret: import.meta.env.VITE_RAPID_API_KEY, // JDoodle clientSecret
+      clientId: import.meta.env.VITE_RAPID_CLIENT_ID,
+      clientSecret: import.meta.env.VITE_RAPID_CLIENT_SECRET,
       script: code,
-      language: language.id, // Ensure this matches JDoodle's language codes
-      versionIndex: language.versionIndex || "0", // Default to version index 0 if not provided
+      language: language.id,
+      versionIndex: "0", // Adjust based on the language version needed
     };
 
     try {
-      // Making a POST request to compile code
       const response = await axios.post(
         import.meta.env.VITE_RAPID_URL,
         formData,
@@ -34,20 +32,17 @@ const useCompile = (
         }
       );
 
-      const data = response.data;
-      setProcessing(false);
-      setOutputDetails(data); // Set the output details
+      const output = response.data;
+      setOutputDetails(output);
       showSuccessToast("Compiled Successfully!");
     } catch (error) {
       const status = error.response?.status;
-      console.log("status", status);
-
       if (status === 429) {
         showErrorToast("Quota of 100 requests exceeded for the Day!", 10000);
       } else {
         showErrorToast("Something went wrong. Try again!");
       }
-
+    } finally {
       setProcessing(false);
     }
   };
