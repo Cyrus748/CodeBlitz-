@@ -15,17 +15,17 @@ const useCompile = (
     setProcessing(true);
 
     const formData = {
-      clientId: import.meta.env.VITE_JDOODLE_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_JDOODLE_CLIENT_SECRET,
+      clientId: import.meta.env.VITE_RAPID_HOST, // JDoodle clientId
+      clientSecret: import.meta.env.VITE_RAPID_API_KEY, // JDoodle clientSecret
       script: code,
       language: language.id, // Ensure this matches JDoodle's language codes
-      versionIndex: language.versionIndex || "0", // Default to version index 0 if not specified
+      versionIndex: language.versionIndex || "0", // Default to version index 0 if not provided
     };
 
     try {
-      // Making a POST request to JDoodle's API for compiling code
+      // Making a POST request to compile code
       const response = await axios.post(
-        import.meta.env.VITE_JDOODLE_URL,
+        import.meta.env.VITE_RAPID_URL,
         formData,
         {
           headers: {
@@ -34,18 +34,20 @@ const useCompile = (
         }
       );
 
-      const { data } = response;
-
-      if (data.error) {
-        showErrorToast(`Error: ${data.error}`);
-      } else {
-        setOutputDetails(data);
-        showSuccessToast("Compiled Successfully!");
-      }
+      const data = response.data;
+      setProcessing(false);
+      setOutputDetails(data); // Set the output details
+      showSuccessToast("Compiled Successfully!");
     } catch (error) {
-      console.error("Error during code compilation:", error);
-      showErrorToast("Something went wrong. Try again!");
-    } finally {
+      const status = error.response?.status;
+      console.log("status", status);
+
+      if (status === 429) {
+        showErrorToast("Quota of 100 requests exceeded for the Day!", 10000);
+      } else {
+        showErrorToast("Something went wrong. Try again!");
+      }
+
       setProcessing(false);
     }
   };
