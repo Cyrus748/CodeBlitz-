@@ -33,3 +33,5 @@ export const useCompile = () => {
 
   return { compileCode };
 };
+
+export { useCompile }; // Named export instead of default
