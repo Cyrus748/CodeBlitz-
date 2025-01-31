@@ -1,4 +1,3 @@
-// hooksExpo.js
-export { useCompile } from "./useCompile";
-export { useTheme } from "./useTheme";
-// export { useShortcutKey } from "./useShortcutKey";
+export {default as useCompile} from "./useCompile"
+export {default as useTheme} from "./useTheme"
+// export {default as useShortcutKey} from "./useShortcutKey"
